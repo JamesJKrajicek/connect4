@@ -1,0 +1,23 @@
+/*elementtostyle{}, use for built in elements like h1, p, etc. */
+/*#itemtostylebyid{} use to apply styling to an element with a specific id*/
+/*.itemtostyle{} use this to apply styling to an element by declaring class="itemtostyle" in the starting tag.*/
+body{
+    background-color: lightcyan;
+    width: 100%
+}
+h1 {
+    text-align: center;
+}
+.board{
+    padding:10px;
+    border-collapse: collapse;
+
+}
+.board th,td{
+    border: 3px solid;
+    height: 40px;
+    width: 40px;
+}
+.board .peg{
+    background-image: radial-gradient(#951d1d 28%, #c02626 32%, #c02626 58%, transparent 62%);
+}
