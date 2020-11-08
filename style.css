@@ -14,10 +14,16 @@ h1 {
 
 }
 .board th,td{
-    border: 3px solid;
-    height: 40px;
-    width: 40px;
+    border: 1px solid;
+    height: 60px;
+    width: 60px;
 }
-.board .peg{
-    background-image: radial-gradient(#951d1d 28%, #c02626 32%, #c02626 58%, transparent 62%);
+.board .p1{
+    background-image: radial-gradient(#951d1d 35%, #c02626 40%, #c02626 65%, transparent 70%);
 }
+
+.board .p2 {
+    background-image: radial-gradient(#958d1d 35%, #c0a926 40%, #c0a926 65%, transparent 70%);
+
+}
+
