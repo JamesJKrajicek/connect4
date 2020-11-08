@@ -1,6 +1,6 @@
-/*elementtostyle{}, use for built in elements like h1, p, etc. */
-/*#itemtostylebyid{} use to apply styling to an element with a specific id*/
-/*.itemtostyle{} use this to apply styling to an element by declaring class="itemtostyle" in the starting tag.*/
+/* elementtostyle{}, use for built in elements like h1, p, etc. */
+/* #itemtostylebyid{} use to apply styling to an element with a specific id*/
+/* .itemtostyle{} use this to apply styling to an element by declaring class="itemtostyle" in the starting tag.*/
 body{
     background-color: lightcyan;
     width: 100%
