@@ -1,7 +1,6 @@
 /**
  * @class
  */
-
 class Executive
 {
     /**
@@ -12,6 +11,7 @@ class Executive
     {
         this.rows = 6;
         this.cols = 7;
+        let play_board = new Board(this.rows, this.cols);
     }
 
 
