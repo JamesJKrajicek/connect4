@@ -9,6 +9,8 @@ function Gameplay ()
     this.board_rows = 6; //How many rows the board has.
     this.board_cols = 7; //How many columns the board has.
     have_winner = false;
+    player1_turn = true;
+    let play_board = new Board(this.board_rows, this.board_cols);
 }
 
 /**
@@ -16,11 +18,12 @@ function Gameplay ()
  */
 Gameplay.prototype.run = function ()
 {
-    let play_board = new Board(this.board_rows, this.board_cols);
-    play_board.renderBoard();
-    while (!have_winner)
-    {
-        //Do stuff
+    while (!have_winner) //Gameplay loop
+    {//Do Stuff
+
+        play_board.renderBoard();
+        
+
         have_winner = true;
     }
 }
@@ -37,5 +40,5 @@ Gameplay.prototype.addToBoard = function (row, col)
 
 Gameplay.prototype.checkForWin = function ()
 {
-    
+
 } 
