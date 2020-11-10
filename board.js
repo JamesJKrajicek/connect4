@@ -16,15 +16,6 @@ function Board(rows, cols) {
     }
 }
 
-/*Board.prototype.run = function () //Delete after confirming renderboard works correctly.
-{
-    this.renderBoard();
-    document.getElementById("game_board").addEventListener("click", e => {
-
-        ;
-    })
-}
-*/
 Board.prototype.renderBoard = function () {
     let board = document.getElementById("game_board")
     let tr = document.createElement("tr");
