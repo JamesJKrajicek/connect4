@@ -9,9 +9,8 @@ class Executive
      */
     constructor()
     {
-        this.rows = 6;
-        this.cols = 7;
-        let play_board = new Board(this.rows, this.cols);
+        let gameinstance = new Gameplay ();
+        gameinstance.run();
     }
 
 
