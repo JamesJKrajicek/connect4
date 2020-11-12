@@ -18,16 +18,47 @@ function Gameplay ()
  */
 Gameplay.prototype.run = function ()
 {
-    document.getElementById("game_board").addEventListener("click", e => {
-        
-        console.log("hi");
-        ;})
-    while (!have_winner) //Gameplay loop
-    {//Do Stuff
-        this.play_board.renderBoard();
-        document.getElementById("notifications").innerText = this.playersName() +"'s Turn";
+    this.play_board.renderBoard(this);
+    this.msg(1);
+}
 
-        have_winner = true;
+
+Gameplay.prototype.click = function (cell_row, cell_col)
+{
+    if (this.isItAValidMove(cell_row, cell_col))
+    {
+        this.addToBoard(cell_row, cell_col);
+        this.switchPlayer();
+        this.checkForWin();
+        this.play_board.renderBoard(this);
+        if (have_winner)
+        {
+            //Output "We won!" message.
+        }
+        else
+        {
+            this.msg(1);
+        }
+    }
+    else
+    {
+        this.msg(2);
+    }
+}
+
+Gameplay.prototype.msg = function (msg_code)
+{
+    if (msg_code = 1) //Current Player's Turn Notification
+    {
+        document.getElementById("notifications").innerText = this.playersName() +"'s Turn";
+    }
+    else if (msg_code = 2)
+    {
+        document.getElementById("notifications").innerText = "Invalid Move: "+this.playersName() +"'s Turn";
+    }
+    else
+    {
+        //Do Nothing
     }
 }
 
@@ -43,9 +74,22 @@ Gameplay.prototype.playersName = function ()
     }
 }
 
-Gameplay.prototype.isValidMove = function (row, col)
+Gameplay.prototype.switchPlayer = function ()
 {
+    player1_turn = !player1_turn;
+}
 
+Gameplay.prototype.isItAValidMove = function (row, col)
+{
+    //Check whether the new piece is either touching the bottom of the board or is on top of another piece (no matter if it's the other player's).
+    if (play_board.isSpaceOpen(row, col) && (row == board_cols || this.play_board.isThereAPlayPieceUnderMe(row, col)))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 Gameplay.prototype.addToBoard = function (row, col)
@@ -55,5 +99,5 @@ Gameplay.prototype.addToBoard = function (row, col)
 
 Gameplay.prototype.checkForWin = function ()
 {
-
+    return false; //Temporary.
 } 

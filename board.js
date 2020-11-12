@@ -16,8 +16,9 @@ function Board(rows, cols) {
     }
 }
 
-Board.prototype.renderBoard = function () {
+Board.prototype.renderBoard = function (game) {
     let board = document.getElementById("game_board")
+    while (board.firstChild) board.removeChild(board.firstChild); // Clear table. Credit: Drake Prebyl
     let tr = document.createElement("tr");
     for (let i = 0; i < this.rows; i++) {
         let tr = document.createElement("tr");
@@ -25,6 +26,7 @@ Board.prototype.renderBoard = function () {
         for (let j = 0; j < this.cols; j++) {
             let td = document.createElement("td");
             td.className = this.validPlayPiece(this.board_arr[i][j]);
+            td.addEventListener("click", e => game.click(i, j));
             board.appendChild(td);
         }
     }
@@ -42,4 +44,35 @@ Board.prototype.validPlayPiece = function (input)
     }
 }
 
+Board.prototype.isSpaceOpen = function (row, col)
+{
+    if (row >= this.rows || row<0 || col >=this.col || col<0) //Is the request location outside the board?
+    {
+        return false;
+    }
+    else if (this.board_arr[row][col] == 0) //If the space being checked contains a 0 (the empty indicator) then the space is open.
+    {
+        return true;
+    }
+    else //All other cases not covered above return false.
+    {
+        return false;
+    }
+}
+
+Board.prototype.isThereAPlayPieceUnderMe = function (row ,col) //Returns false if the coordinates are off the board's valid game space. True otherwise.
+{
+    if ((row+1) >= this.rows) //Is the spot below the position given by row and col outside the board?
+    }
+        return false;
+    }
+    else if (this.board_arr[(row+1),col] != 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
