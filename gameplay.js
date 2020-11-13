@@ -25,9 +25,10 @@ Gameplay.prototype.run = function ()
 
 Gameplay.prototype.click = function (cell_row, cell_col)
 {
+    //console.log ("Row: "+cell_row +", Column: "+cell_col);
     if (this.isItAValidMove(cell_row, cell_col))
     {
-        this.addToBoard(cell_row, cell_col);
+        this.play_board.addToBoard(cell_row, cell_col, player1_turn);
         this.switchPlayer();
         this.checkForWin();
         this.play_board.renderBoard(this);
@@ -81,8 +82,10 @@ Gameplay.prototype.switchPlayer = function ()
 
 Gameplay.prototype.isItAValidMove = function (row, col)
 {
+    console.log(this.play_board.isSpaceOpen(row, col),'\n',row == board_cols, '\n', this.play_board.isThereAPlayPieceUnderMe(row, col));
+
     //Check whether the new piece is either touching the bottom of the board or is on top of another piece (no matter if it's the other player's).
-    if (play_board.isSpaceOpen(row, col) && (row == board_cols || this.play_board.isThereAPlayPieceUnderMe(row, col)))
+    if (this.play_board.isSpaceOpen(row, col) && (row == (board_rows-1) || this.play_board.isThereAPlayPieceUnderMe(row, col)))
     {
         return true;
     }
@@ -90,11 +93,6 @@ Gameplay.prototype.isItAValidMove = function (row, col)
     {
         return false;
     }
-}
-
-Gameplay.prototype.addToBoard = function (row, col)
-{
-
 }
 
 Gameplay.prototype.checkForWin = function ()

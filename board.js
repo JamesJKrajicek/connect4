@@ -60,13 +60,13 @@ Board.prototype.isSpaceOpen = function (row, col)
     }
 }
 
-Board.prototype.isThereAPlayPieceUnderMe = function (row ,col) //Returns false if the coordinates are off the board's valid game space. True otherwise.
+Board.prototype.isThereAPlayPieceUnderMe = function (row, col) //Returns false if the coordinates are off the board's valid game space. True otherwise.
 {
     if ((row+1) >= this.rows) //Is the spot below the position given by row and col outside the board?
-    }
+    {
         return false;
     }
-    else if (this.board_arr[(row+1),col] != 0)
+    else if (this.board_arr[(row+1)][col] !== 0)
     {
         return true;
     }
@@ -76,3 +76,15 @@ Board.prototype.isThereAPlayPieceUnderMe = function (row ,col) //Returns false i
     }
 }
 
+Board.prototype.addToBoard = function (row, col, player)
+{
+    if (player)
+    {
+        this.board_arr[row][col] = 1;
+    }
+    else
+    {
+        this.board_arr[row][col] = 2;
+    }
+
+}
