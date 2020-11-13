@@ -49,11 +49,11 @@ Gameplay.prototype.click = function (cell_row, cell_col)
 
 Gameplay.prototype.msg = function (msg_code)
 {
-    if (msg_code = 1) //Current Player's Turn Notification
+    if (msg_code == 1) //Current Player's Turn Notification
     {
         document.getElementById("notifications").innerText = this.playersName() +"'s Turn";
     }
-    else if (msg_code = 2)
+    else if (msg_code == 2)
     {
         document.getElementById("notifications").innerText = "Invalid Move: "+this.playersName() +"'s Turn";
     }
@@ -82,7 +82,7 @@ Gameplay.prototype.switchPlayer = function ()
 
 Gameplay.prototype.isItAValidMove = function (row, col)
 {
-    console.log(this.play_board.isSpaceOpen(row, col),'\n',row == board_cols, '\n', this.play_board.isThereAPlayPieceUnderMe(row, col));
+    //console.log(this.play_board.isSpaceOpen(row, col),'\n',row == board_cols, '\n', this.play_board.isThereAPlayPieceUnderMe(row, col));
 
     //Check whether the new piece is either touching the bottom of the board or is on top of another piece (no matter if it's the other player's).
     if (this.play_board.isSpaceOpen(row, col) && (row == (board_rows-1) || this.play_board.isThereAPlayPieceUnderMe(row, col)))
