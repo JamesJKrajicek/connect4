@@ -18,7 +18,7 @@ function Gameplay ()
  */
 Gameplay.prototype.run = function ()
 {
-    this.play_board.renderBoard(this);
+    this.play_board.renderBoard(this, have_winner);
     this.msg(1);
 }
 
@@ -29,17 +29,16 @@ Gameplay.prototype.click = function (cell_row, cell_col)
     if (this.isItAValidMove(cell_row, cell_col))
     {
         this.play_board.addToBoard(cell_row, cell_col, player1_turn);
-        this.switchPlayer();
-        this.checkForWin();
-        this.play_board.renderBoard(this);
-        if (have_winner)
+        if (!this.checkForWin())
         {
-            //Output "We won!" message.
+            this.switchPlayer();
+            this.msg(1);
         }
         else
         {
-            this.msg(1);
+            this.msg(3);
         }
+        this.play_board.renderBoard(this, have_winner);
     }
     else
     {
@@ -56,6 +55,10 @@ Gameplay.prototype.msg = function (msg_code)
     else if (msg_code == 2)
     {
         document.getElementById("notifications").innerText = "Invalid Move: "+this.playersName() +"'s Turn";
+    }
+    else if (msg_code == 3)
+    {
+        document.getElementById("notifications").innerText = this.playersName() +" Wins!";
     }
     else
     {
@@ -97,5 +100,6 @@ Gameplay.prototype.isItAValidMove = function (row, col)
 
 Gameplay.prototype.checkForWin = function ()
 {
-    return false; //Temporary.
+    have_winner= true;
+    return true;
 } 

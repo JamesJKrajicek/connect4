@@ -16,8 +16,8 @@ function Board(rows, cols) {
     }
 }
 
-Board.prototype.renderBoard = function (game) {
-    let board = document.getElementById("game_board")
+Board.prototype.renderBoard = function (game, win_state) {
+    let board = document.getElementById("game_board");
     while (board.firstChild) board.removeChild(board.firstChild); // Clear table. Credit: Drake Prebyl
     let tr = document.createElement("tr");
     for (let i = 0; i < this.rows; i++) {
@@ -26,7 +26,12 @@ Board.prototype.renderBoard = function (game) {
         for (let j = 0; j < this.cols; j++) {
             let td = document.createElement("td");
             td.className = this.validPlayPiece(this.board_arr[i][j]);
-            td.addEventListener("click", e => game.click(i, j));
+            if (!win_state) //If the game is ongoing then add EventListners to the board's elements. 
+            {
+                td.addEventListener("click", e => game.click(i, j));
+            }
+            else
+            {/* If the game is finished then leave out the event listeners. This effectively freezes the board's state.*/}
             board.appendChild(td);
         }
     }
