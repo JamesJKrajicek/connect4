@@ -29,7 +29,7 @@ Gameplay.prototype.click = function (cell_row, cell_col)
     if (this.isItAValidMove(cell_row, cell_col))
     {
         this.play_board.addToBoard(cell_row, cell_col, player1_turn);
-        if (!this.checkForWin())
+        if (!this.checkForWin(cell_row, cell_col))
         {
             this.switchPlayer();
             this.msg(1);
@@ -98,8 +98,12 @@ Gameplay.prototype.isItAValidMove = function (row, col)
     }
 }
 
-Gameplay.prototype.checkForWin = function ()
-{
-    have_winner= true;
-    return true;
+Gameplay.prototype.checkForWin = function (row, col)
+{//Check up, up-left diag, left, down-left diag, down, down-right diag, right, up-right diag.
+    
+    
+    
+    
+    //have_winner= true;
+    return false;
 } 

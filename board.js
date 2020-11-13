@@ -49,20 +49,28 @@ Board.prototype.validPlayPiece = function (input)
     }
 }
 
-Board.prototype.isSpaceOpen = function (row, col)
+Board.prototype.isSpaceInsideBoard = function (row, col)
 {
     if (row >= this.rows || row<0 || col >=this.col || col<0) //Is the request location outside the board?
     {
-        return false;
+        return false; //If so return false.
     }
-    else if (this.board_arr[row][col] == 0) //If the space being checked contains a 0 (the empty indicator) then the space is open.
+    else //Otherwise, return true.
     {
         return true;
     }
-    else //All other cases not covered above return false.
+}
+
+Board.prototype.isSpaceOpen = function (row, col)
+{
+    if (this.isSpaceInsideBoard(row,col)) //Is the request location inside the board?
     {
-        return false;
+         if (this.board_arr[row][col] == 0) //If the space being checked contains a 0 (the empty indicator) then the space is open.
+        {
+            return true;
+        }
     }
+    return false;// Return false if the request location was outside the board OR the space being checked wasn't open.
 }
 
 Board.prototype.isThereAPlayPieceUnderMe = function (row, col) //Returns false if the coordinates are off the board's valid game space. True otherwise.
