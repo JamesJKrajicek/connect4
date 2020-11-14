@@ -8,6 +8,7 @@ function Gameplay ()
 {
     board_rows = 6; //How many rows the board has.
     board_cols = 7; //How many columns the board has.
+    winning_amt = 4; //The number of pieces belonging to a single player that must touch in order to win the game. 
     have_winner = false;
     player1_turn = true;
     this.play_board = new Board(board_rows, board_cols);
@@ -29,14 +30,14 @@ Gameplay.prototype.click = function (cell_row, cell_col)
     if (this.isItAValidMove(cell_row, cell_col))
     {
         this.play_board.addToBoard(cell_row, cell_col, player1_turn);
-        if (!this.checkForWin(cell_row, cell_col))
+        if (this.checkForWin(cell_row, cell_col))
         {
-            this.switchPlayer();
-            this.msg(1);
+            this.msg(3);
         }
         else
         {
-            this.msg(3);
+            this.switchPlayer();
+            this.msg(1);
         }
         this.play_board.renderBoard(this, have_winner);
     }
@@ -101,9 +102,78 @@ Gameplay.prototype.isItAValidMove = function (row, col)
 Gameplay.prototype.checkForWin = function (row, col)
 {//Check up, up-left diag, left, down-left diag, down, down-right diag, right, up-right diag.
     //Recursive.
-    
-    
-    
-    //have_winner= true;
-    return false;
-} 
+    //let success = false;
+    let player_board_val;
+    if (player1_turn)
+    {
+        player_board_val = 1;
+    }
+    else
+    {
+        player_board_val = 2;
+    }
+    //recWinCheck (row,col,1,1,player_board_val,1)
+    if (this.recWinCheck (row,col,-1,0,player_board_val,1))
+    {
+        have_winner=true;
+        return true;
+    }
+    else if (this.recWinCheck (row,col,-1,-1,player_board_val,1))
+    {
+        have_winner = true;
+        return true;
+    }
+    else if (this.recWinCheck (row,col,0,-1,player_board_val,1))
+    {
+        have_winner = true;
+        return true;
+    }
+    else if (this.recWinCheck (row,col,1,-1,player_board_val,1))
+    {
+        have_winner = true;
+        return true;
+    }
+    else if (this.recWinCheck (row,col,1,0,player_board_val,1))
+    {
+        have_winner = true;
+        return true;
+    }
+    else if (this.recWinCheck (row,col,1,1,player_board_val,1))
+    {
+        have_winner = true;
+        return true;
+    }
+    else if (this.recWinCheck (row,col,0,1,player_board_val,1))
+    {
+        have_winner = true;
+        return true;
+    }
+    else if (this.recWinCheck (row,col,-1,1,player_board_val,1))
+    {
+        have_winner = true;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+Gameplay.prototype.recWinCheck = function (row, col, row_inc, col_inc, c_player, in_a_row)
+{
+    in_a_row = (in_a_row + 1);
+    row = (row + row_inc);//Increment the row to be looked at. This is done first to avoid looking at the originating cell.
+    col = (col + col_inc);//Increment the column to be looked at.
+    if (!this.play_board.isSpaceInsideBoard (row,col) || (this.play_board.lookup(row, col) != c_player))
+    {
+        return false;
+    }
+    else if (in_a_row >= 4)//When there are three pieces in a row (plus the piece that was just put down) belonging to the same player then that player's won. Return true.
+    {
+        return true;
+    }
+    else
+    {
+        return (this.recWinCheck(row, col, row_inc, col_inc, c_player, in_a_row));
+    }
+}
