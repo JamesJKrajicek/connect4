@@ -100,7 +100,7 @@ Gameplay.prototype.isItAValidMove = function (row, col)
 
 Gameplay.prototype.checkForWin = function (row, col)
 {//Check up, up-left diag, left, down-left diag, down, down-right diag, right, up-right diag.
-    
+    //Recursive.
     
     
     

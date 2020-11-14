@@ -6,7 +6,8 @@
 function Board(rows, cols) {
     this.rows = rows;
     this.cols = cols;
-    this.play_pieces_arr = ["", "p1", "p2"]; //The different styles we can apply to the table cells.
+    this.play_pieces_arr = ["", "p1", "p2"]; /*The different styles we can apply to the table cells 
+    to graphically represent an empty cell, a cell controlled by player 1, or a cell contained by player 2 respectively.*/
     this.board_arr = new Array(rows);
     for (let i = 0; i < rows; i++) {
         this.board_arr[i] = new Array(cols);
@@ -75,7 +76,7 @@ Board.prototype.isSpaceOpen = function (row, col)
 
 Board.prototype.isThereAPlayPieceUnderMe = function (row, col) //Returns false if the coordinates are off the board's valid game space. True otherwise.
 {
-    if ((row+1) >= this.rows) //Is the spot below the position given by row and col outside the board?
+    if (!this.isSpaceInsideBoard(row+1,col)) //Is the spot below the position given by row and col outside the board?
     {
         return false;
     }
@@ -88,6 +89,20 @@ Board.prototype.isThereAPlayPieceUnderMe = function (row, col) //Returns false i
         return false;
     }
 }
+
+Board.prototype.lookup = function (row, col) //Returns false if the coordinates are off the board's valid game space. True otherwise.
+{
+    if (this.isSpaceInsideBoard(row, col)) //Is the spot below the position given by row and col outside the board?
+    {
+        return (this.board_arr[row][col]);
+    }
+    else
+    {
+        return (-1);
+    }
+}
+
+
 
 Board.prototype.addToBoard = function (row, col, player)
 {
